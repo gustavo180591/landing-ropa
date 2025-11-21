@@ -1,0 +1,25 @@
+{
+  "title": "Tu Marca de Ropa",
+  "description": "Descubre nuestra exclusiva colección de ropa con diseños únicos y de calidad superior.",
+  "brandName": "Tu Marca",
+  "logo": "/logo.svg",
+  "primaryColor": "#3B82F6",
+  "secondaryColor": "#1E40AF",
+  "accentColor": "#F59E0B",
+  "textColor": "#1F2937",
+  "lightTextColor": "#6B7280",
+  "backgroundColor": "#FFFFFF",
+  "social": {
+    "instagram": "https://instagram.com/tumarca",
+    "facebook": "https://facebook.com/tumarca",
+    "whatsapp": "https://wa.me/5491112345678"
+  },
+  "contact": {
+    "email": "hola@tumarca.com",
+    "phone": "+54 9 11 1234-5678",
+    "address": "Buenos Aires, Argentina"
+  },
+  "seo": {
+    "keywords": "ropa, moda, diseño, comprar ropa, tienda online, moda argentina"
+  }
+}
