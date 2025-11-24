@@ -1,0 +1,27 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ProductCard from '../../components/products/ProductCard.astro';
+import { products } from '../../lib/products';
+
+const pageTitle = 'Nuestros Productos';
+const pageDescription = 'Descubre nuestra colección de ropa de alta calidad';
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <div class="bg-white">
+    <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 lg:max-w-7xl lg:px-8">
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Nuestra Colección</h1>
+      
+      <!-- Filtros (próximamente) -->
+      <div class="mt-6">
+        <h2 class="sr-only">Productos</h2>
+        
+        <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+          {products.map((product) => (
+            <ProductCard product={product} />
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,66 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getProductById } from '../../lib/products';
+
+const { id } = Astro.params;
+
+// Ensure id is a string and exists
+if (!id || typeof id !== 'string') {
+  return Astro.redirect('/404');
+}
+
+const product = getProductById(id);
+
+if (!product) {
+  return Astro.redirect('/404');
+}
+
+const pageTitle = product.name;
+const pageDescription = product.description;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <div class="bg-white">
+    <div class="pt-6">
+      <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
+        <!-- Imágenes del producto -->
+        <div class="aspect-h-4 aspect-w-3 overflow-hidden rounded-lg">
+          <img 
+            src={product.image} 
+            alt={product.name}
+            class="h-full w-full object-cover object-center"
+          />
+        </div>
+
+        <!-- Información del producto -->
+        <div class="mt-4 lg:mt-0 lg:pl-10">
+          <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+            {product.name}
+          </h1>
+
+          <p class="mt-3 text-3xl tracking-tight text-gray-900">
+            ${product.price.toFixed(2)}
+          </p>
+
+          <div class="mt-6">
+            <h3 class="sr-only">Descripción</h3>
+            <div class="space-y-6 text-base text-gray-700">
+              <p>{product.description}</p>
+            </div>
+          </div>
+
+          <div class="mt-6">
+            <div class="mt-10 flex">
+              <button
+                type="submit"
+                class="flex max-w-xs flex-1 items-center justify-center rounded-md border border-transparent bg-blue-600 px-8 py-3 text-base font-medium text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-50 sm:w-full"
+              >
+                Añadir al carrito
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
