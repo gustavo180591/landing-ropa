@@ -1,0 +1,16 @@
+/* src/styles/global.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add your custom styles below */
+:root {
+  --primary-color: #3b82f6;
+  --secondary-color: #1e40af;
+}
+
+body {
+  @apply bg-white text-gray-900;
+}
+
+/* Add any other global styles you need */
