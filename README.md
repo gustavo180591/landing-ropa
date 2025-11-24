@@ -1,52 +1,59 @@
-# Astro Starter Kit: Basics
+# 🛍️ Tienda de Ropa - Landing Page
 
-```sh
-pnpm create astro@latest -- --template basics
-```
+Bienvenido al repositorio de la tienda de ropa online, construida con Astro, Tailwind CSS y TypeScript.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🚀 Características
 
-## 🚀 Project Structure
+- 🎨 Diseño moderno y responsivo
+- ⚡ Rendimiento óptimo con Astro
+- 🛒 Gestión de productos con TypeScript
+- 📱 Compatible con móviles
+- 🌈 Estilos con Tailwind CSS
 
-Inside of your Astro project, you'll see the following folders and files:
+## 🏗️ Estructura del Proyecto
 
 ```text
 /
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+├── public/              # Archivos estáticos
+├── src/
+│   ├── assets/         # Imágenes y recursos
+│   ├── components/     # Componentes reutilizables
+│   ├── content/        # Contenido en Markdown
+│   ├── layouts/        # Plantillas de diseño
+│   ├── lib/            # Utilidades y lógica
+│   └── pages/          # Rutas de la aplicación
+├── docs/               # Documentación
+└── tailwind.config.mjs # Configuración de Tailwind
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🚀 Comandos principales
 
-## 🧞 Commands
+| Comando             | Acción                                     |
+|---------------------|--------------------------------------------|
+| `pnpm install`      | Instalar dependencias                      |
+| `pnpm dev`          | Iniciar servidor de desarrollo             |
+| `pnpm build`        | Construir para producción                  |
+| `pnpm preview`      | Vista previa de la compilación             |
+| `pnpm astro ...`    | Comandos de Astro CLI                      |
 
-All commands are run from the root of the project, from a terminal:
+## 🛠️ Tecnologías
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+- [Astro](https://astro.build/)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [PNPM](https://pnpm.io/)
 
-## 👀 Want to learn more?
+## 📄 Licencia
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-# 🚢 Deploy to Netlify
+Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más información.
 
-Follow these simple steps to deploy this static Astro landing to Netlify:
+## 👥 Contribución
+
+Las contribuciones son bienvenidas. Por favor, abre un issue primero para discutir los cambios que te gustaría hacer.
+
+## 🚀 Despliegue
+
+Este proyecto está configurado para desplegarse en Netlify. Simplemente haz push a la rama `main` para desplegar automáticamente.
 
 - **Build command:** `pnpm run build`
 - **Publish directory:** `dist`

@@ -1,84 +1,105 @@
-# 🗺️ Roadmap - Landing Page de Moda
+# 🗺️ Roadmap - Tienda de Ropa Online
 
-## 📋 Fase 1: Configuración Inicial (Día 1)
-- [ ] **Configuración del Proyecto**
-  - [ ] Actualizar `config.json` con información de la marca
-  - [ ] Configurar redes sociales y datos de contacto
-  - [ ] Definir paleta de colores y tipografía
+## 📋 Fase 1: Configuración Inicial (Completado ✅)
+- [x] **Configuración del Proyecto**
+  - [x] Configuración inicial de Astro con TypeScript
+  - [x] Integración de Tailwind CSS
+  - [x] Configuración de scripts y dependencias
+  - [x] Definición de estructura de directorios
 
-- [ ] **Estructura de Archivos**
-  - [ ] Crear estructura de directorios para imágenes
-  - [ ] Organizar assets (logo, iconos, fuentes)
+- [x] **Estructura de Archivos**
+  - [x] Creación de componentes base
+  - [x] Configuración de rutas básicas
+  - [x] Implementación de Layout principal
 
-## 📝 Fase 2: Contenido (Día 1-2)
+## 📝 Fase 2: Desarrollo del Contenido (En Progreso 🚧)
 - [ ] **Secciones Principales**
-  - [ ] Hero - Texto principal y CTA
+  - [x] Navbar - Componente de navegación principal
+  - [ ] Hero - Sección principal con CTA
   - [ ] Catálogo de Productos
+    - [x] Estructura de datos de productos
+    - [ ] Componente de tarjeta de producto
+    - [ ] Filtros y búsqueda
   - [ ] Sobre la Marca
   - [ ] Testimonios
-  - [ ] Contacto
+  - [ ] Formulario de Contacto
 
-- [ ] **Contenido por Sección**
-  - [ ] Redactar textos finales
-  - [ ] Preparar imágenes (productos, equipo, etc.)
-  - [ ] Escribir meta descripciones para SEO
+- [ ] **Gestión de Contenido**
+  - [ ] Crear plantillas de contenido
+  - [ ] Implementar sistema de categorías
+  - [ ] Configurar metadatos para SEO
 
-## 🎨 Fase 3: Diseño (Día 2-3)
+## 🎨 Fase 3: Diseño y Experiencia (Próximamente)
 - [ ] **Diseño UI/UX**
-  - [ ] Maquetación en desktop
-  - [ ] Diseño responsive para móviles
-  - [ ] Estilos y animaciones
+  - [ ] Sistema de diseño
+  - [ ] Maquetación responsive (mobile-first)
+  - [ ] Micro-interacciones y animaciones
+  - [ ] Estados de carga y feedback
 
 - [ ] **Elementos Visuales**
-  - [ ] Optimizar imágenes
-  - [ ] Crear iconos personalizados
-  - [ ] Diseñar botones y elementos interactivos
+  - [ ] Sistema de iconos
+  - [ ] Galería de productos
+  - [ ] Componentes interactivos
+  - [ ] Temas claro/oscuro
 
-## 🛠️ Fase 4: Desarrollo (Día 3-4)
-- [ ] **Implementación Técnica**
-  - [ ] Crear componentes de Astro
-  - [ ] Integrar formularios
-  - [ ] Configurar envío de emails
-  - [ ] Implementar carrito de compras (si aplica)
+## ⚙️ Fase 4: Funcionalidades Avanzadas
+- [ ] **Características Principales**
+  - [ ] Sistema de carrito de compras
+  - [ ] Integración con pasarela de pago
+  - [ ] Gestión de inventario
+  - [ ] Sistema de cupones y descuentos
 
 - [ ] **Integraciones**
   - [ ] Redes sociales
-  - [ ] WhatsApp Business
-  - [ ] Google Maps
+  - [ ] WhatsApp Business API
+  - [ ] Google Analytics 4
+  - [ ] Email marketing
 
-## 🚀 Fase 5: Lanzamiento (Día 5)
-- [ ] **Preparación**
-  - [ ] Pruebas en diferentes navegadores
-  - [ ] Optimización de rendimiento
-  - [ ] Pruebas de carga
+## 🚀 Fase 5: Pruebas y Lanzamiento
+- [ ] **Control de Calidad**
+  - [ ] Pruebas de usabilidad
+  - [ ] Pruebas de rendimiento
+  - [ ] Pruebas de seguridad
+  - [ ] Pruebas en dispositivos móviles
 
 - [ ] **Despliegue**
-  - [ ] Configurar dominio
-  - [ ] Hacer deploy
-  - [ ] Configurar SSL
+  - [ ] Configuración de producción
+  - [ ] Estrategia de despliegue
+  - [ ] Configuración de CDN
+  - [ ] Plan de rollback
 
-## 📊 Fase 6: Post-Lanzamiento
+## 📊 Fase 6: Crecimiento y Análisis
 - [ ] **Monitoreo**
-  - [ ] Configurar Google Analytics
-  - [ ] Configurar Facebook Pixel
-  - [ ] Monitorear errores 404
+  - [ ] Monitoreo de rendimiento
+  - [ ] Análisis de conversión
+  - [ ] Seguimiento de errores
+  - [ ] Reportes automáticos
 
-- [ ] **Mejoras Continuas**
-  - [ ] Recopilar feedback
-  - [ ] A/B testing
-  - [ ] Actualizar contenido regularmente
+- [ ] **Optimización**
+  - [ ] Pruebas A/B
+  - [ ] Optimización de conversión
+  - [ ] Mejora continua de rendimiento
+  - [ ] Actualizaciones de seguridad
 
-## 📌 Notas Importantes
-- Las fechas son estimativas y pueden ajustarse según necesidades
-- Priorizar versión móvil (mobile-first)
-- Mantener copias de seguridad regulares
+## 📌 Notas del Proyecto
+- **Enfoque**: Mobile-first y rendimiento
+- **Tecnologías Clave**:
+  - Astro para renderizado estático
+  - TypeScript para tipado seguro
+  - Tailwind CSS para estilos
+  - Integración continua con Netlify
+
+## 📈 Métricas Clave
+- Tiempo de carga objetivo: < 2s
+- Puntuación Lighthouse: > 90
+- Compatibilidad: Últimas 2 versiones de navegadores principales
 
 ## 🔄 Progreso General
 ```
-[===                 ] 15% - En progreso
+[=======            ] 30% - En desarrollo
 ```
 
-📅 **Última actualización**: 21/11/2025
+📅 **Última actualización**: 24/11/2025
 
 ---
 ✏️ *Edita este archivo para actualizar el progreso de cada tarea*
