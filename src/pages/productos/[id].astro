@@ -1,6 +1,6 @@
 ---
 import Layout from '../../layouts/Layout.astro';
-import { getProductById } from '../../lib/products';
+import { getProductById, products } from '../../lib/products';
 
 const { id } = Astro.params;
 
@@ -17,13 +17,21 @@ if (!product) {
 
 const pageTitle = product.name;
 const pageDescription = product.description;
+
+// Generate static paths for all products
+export async function getStaticPaths() {
+  return products.map(product => ({
+    params: { id: product.id },
+    props: { product },
+  }));
+}
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
   <div class="bg-white">
     <div class="pt-6">
       <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
-        <!-- Imágenes del producto -->
+        <!-- Product images -->
         <div class="aspect-h-4 aspect-w-3 overflow-hidden rounded-lg">
           <img 
             src={product.image} 
@@ -32,7 +40,7 @@ const pageDescription = product.description;
           />
         </div>
 
-        <!-- Información del producto -->
+        <!-- Product info -->
         <div class="mt-4 lg:mt-0 lg:pl-10">
           <h1 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
             {product.name}
