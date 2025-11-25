@@ -1,5 +1,5 @@
 ---
-title: "Colección Otoño/Invierno 2023"
+title: "Colección Otoño/Invierno 2025"
 subtitle: "Diseños únicos que cuentan tu historia"
 buttonText: "Descubrir Colección"
 buttonLink: "#productos"
