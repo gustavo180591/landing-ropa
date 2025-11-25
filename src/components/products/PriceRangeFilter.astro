@@ -1,0 +1,225 @@
+---
+// src/components/products/PriceRangeFilter.astro
+interface Props {
+  minPrice: number;
+  maxPrice: number;
+  selectedMin?: number;
+  selectedMax?: number;
+  baseUrl: string;
+}
+
+const {
+  minPrice,
+  maxPrice,
+  selectedMin = minPrice,
+  selectedMax = maxPrice,
+  baseUrl
+} = Astro.props;
+
+const formatPrice = (price: number) => {
+  return new Intl.NumberFormat('es-AR', {
+    style: 'currency',
+    currency: 'ARS'
+  }).format(price);
+};
+
+const getPriceRangeUrl = (min: number, max: number) => {
+  const url = new URL(baseUrl, 'http://dummy.com');
+  
+  // Add or update min and max price parameters
+  if (min > minPrice) {
+    url.searchParams.set('minPrice', min.toString());
+  } else {
+    url.searchParams.delete('minPrice');
+  }
+  
+  if (max < maxPrice) {
+    url.searchParams.set('maxPrice', max.toString());
+  } else {
+    url.searchParams.delete('maxPrice');
+  }
+  
+  return url.pathname + url.search;
+};
+---
+
+<div class="space-y-4">
+  <h3 class="text-lg font-medium text-gray-900">Rango de Precios</h3>
+  
+  <div class="space-y-4">
+    <div class="flex items-center justify-between space-x-4">
+      <div class="w-1/2">
+        <label for="minPrice" class="block text-sm font-medium text-gray-700 mb-1">Mínimo</label>
+        <div class="relative rounded-md shadow-sm">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <span class="text-gray-500 sm:text-sm">$</span>
+          </div>
+          <input
+            type="number"
+            id="minPrice"
+            name="minPrice"
+            min={minPrice}
+            max={selectedMax}
+            value={selectedMin}
+            class="block w-full pl-7 pr-12 border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            hx-get={getPriceRangeUrl(selectedMin, selectedMax)}
+            hx-trigger="change, keyup delay:500ms"
+            hx-target="#products-grid"
+            hx-push-url="true"
+          />
+        </div>
+      </div>
+      
+      <div class="w-1/2">
+        <label for="maxPrice" class="block text-sm font-medium text-gray-700 mb-1">Máximo</label>
+        <div class="relative rounded-md shadow-sm">
+          <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+            <span class="text-gray-500 sm:text-sm">$</span>
+          </div>
+          <input
+            type="number"
+            id="maxPrice"
+            name="maxPrice"
+            min={selectedMin}
+            max={maxPrice}
+            value={selectedMax}
+            class="block w-full pl-7 pr-12 border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+            hx-get={getPriceRangeUrl(selectedMin, selectedMax)}
+            hx-trigger="change, keyup delay:500ms"
+            hx-target="#products-grid"
+            hx-push-url="true"
+          />
+        </div>
+      </div>
+    </div>
+    
+    <div class="pt-4">
+      <div 
+        x-data="{
+          min: {selectedMin},
+          max: {selectedMax},
+          minPrice: {minPrice},
+          maxPrice: {maxPrice},
+          get minPercent() {
+            return ((this.min - this.minPrice) / (this.maxPrice - this.minPrice)) * 100;
+          },
+          get maxPercent() {
+            return 100 - ((this.maxPrice - this.max) / (this.maxPrice - this.minPrice)) * 100;
+          },
+          updateMin() {
+            this.min = Math.min(parseInt(this.$refs.minInput.value), this.max - 1);
+            this.$refs.minInput.value = this.min;
+            this.$refs.rangeMin.value = this.min;
+            this.$refs.rangeMin.style.left = this.minPercent + '%';
+            this.$refs.range.style.left = this.minPercent + '%';
+            this.$refs.range.style.width = (this.maxPercent - this.minPercent) + '%';
+            
+            // Update URL
+            const url = new URL('{baseUrl}', window.location.origin);
+            if (this.min > this.minPrice) {
+              url.searchParams.set('minPrice', this.min);
+            } else {
+              url.searchParams.delete('minPrice');
+            }
+            if (this.max < this.maxPrice) {
+              url.searchParams.set('maxPrice', this.max);
+            } else {
+              url.searchParams.delete('maxPrice');
+            }
+            window.history.pushState({}, '', url.pathname + url.search);
+            
+            // Trigger HTMX
+            htmx.trigger('#minPrice', 'change');
+          },
+          updateMax() {
+            this.max = Math.max(parseInt(this.$refs.maxInput.value), this.min + 1);
+            this.$refs.maxInput.value = this.max;
+            this.$refs.rangeMax.value = this.max;
+            this.$refs.rangeMax.style.left = this.maxPercent + '%';
+            this.$refs.range.style.width = (this.maxPercent - this.minPercent) + '%';
+            
+            // Update URL
+            const url = new URL('{baseUrl}', window.location.origin);
+            if (this.min > this.minPrice) {
+              url.searchParams.set('minPrice', this.min);
+            } else {
+              url.searchParams.delete('minPrice');
+            }
+            if (this.max < this.maxPrice) {
+              url.searchParams.set('maxPrice', this.max);
+            } else {
+              url.searchParams.delete('maxPrice');
+            }
+            window.history.pushState({}, '', url.pathname + url.search);
+            
+            // Trigger HTMX
+            htmx.trigger('#maxPrice', 'change');
+          }
+        }"
+        x-init="
+          $watch('min', value => updateMin());
+          $watch('max', value => updateMax());
+        "
+        class="relative h-12"
+      >
+        <div class="absolute top-1/2 w-full h-1 bg-gray-200 rounded-full -translate-y-1/2">
+          <div 
+            x-ref="range" 
+            class="absolute h-full bg-blue-500 rounded-full"
+            :style="`left: ${minPercent}%; width: ${maxPercent - minPercent}%`"
+          ></div>
+        </div>
+        
+        <input 
+          x-ref="rangeMin"
+          type="range"
+          :min="minPrice"
+          :max="maxPrice"
+          :value="min"
+          @input="min = parseInt($event.target.value)"
+          class="absolute w-full h-1 bg-transparent appearance-none pointer-events-none -translate-y-1/2 top-1/2 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-blue-500 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg"
+        >
+        
+        <input 
+          x-ref="rangeMax"
+          type="range"
+          :min="minPrice"
+          :max="maxPrice"
+          :value="max"
+          @input="max = parseInt($event.target.value)"
+          class="absolute w-full h-1 bg-transparent appearance-none pointer-events-none -translate-y-1/2 top-1/2 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-blue-500 [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:shadow-lg"
+        >
+      </div>
+    </div>
+    
+    <div class="flex justify-between text-sm text-gray-500">
+      <span>{formatPrice(minPrice)}</span>
+      <span>{formatPrice(maxPrice)}</span>
+    </div>
+  </div>
+  
+  {selectedMin > minPrice || selectedMax < maxPrice ? (
+    <div class="pt-2">
+      <a 
+        href={baseUrl}
+        class="text-sm text-blue-600 hover:text-blue-800 hover:underline"
+      >
+        Limpiar filtros de precio
+      </a>
+    </div>
+  ) : null}
+</div>
+
+<script>
+  // Initialize Alpine.js if not already loaded
+  if (!window.Alpine) {
+    document.addEventListener('alpine:init', () => {
+      // Alpine is now available
+    });
+  }
+  
+  // Handle HTMX after swap
+  document.body.addEventListener('htmx:afterSwap', function(evt) {
+    // Re-initialize any necessary components
+  });
+</script>

@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import ProductCard from '../../components/products/ProductCard.astro';
 import CategoryFilter from '../../components/products/CategoryFilter.astro';
 import SizeFilter from '../../components/products/SizeFilter.astro';
+import PriceRangeFilter from '../../components/products/PriceRangeFilter.astro';
 import { getProductsByCategory, getProductCountByCategory, type Size } from '../../lib/products';
 
 const pageTitle = 'Nuestros Productos';
@@ -12,6 +13,8 @@ const pageDescription = 'Descubre nuestra colección de ropa de alta calidad';
 const url = new URL(Astro.request.url);
 const selectedCategory = url.searchParams.get('categoria') || 'todos';
 const selectedSizes = url.searchParams.getAll('talla') as Size[];
+const minPrice = url.searchParams.has('minPrice') ? Number(url.searchParams.get('minPrice')) : undefined;
+const maxPrice = url.searchParams.has('maxPrice') ? Number(url.searchParams.get('maxPrice')) : undefined;
 
 // Get products filtered by category
 let filteredProducts = getProductsByCategory(selectedCategory === 'todos' ? 'todos' : selectedCategory);
@@ -21,6 +24,15 @@ if (selectedSizes.length > 0) {
   filteredProducts = filteredProducts.filter(product => 
     product.sizes.some(size => selectedSizes.includes(size.size as Size) && size.inStock)
   );
+}
+
+// Filter by price range if specified
+if (minPrice !== undefined || maxPrice !== undefined) {
+  filteredProducts = filteredProducts.filter(product => {
+    const price = product.price;
+    return (minPrice === undefined || price >= minPrice) && 
+           (maxPrice === undefined || price <= maxPrice);
+  });
 }
 
 // Get all available sizes from filtered products
@@ -33,6 +45,15 @@ const availableSizes = Array.from(
     )
   )
 ) as Size[];
+
+// Get min and max prices from all products (not just filtered ones)
+const allProducts = getProductsByCategory(selectedCategory === 'todos' ? 'todos' : selectedCategory);
+const minProductPrice = Math.floor(Math.min(...allProducts.map(p => p.price)));
+const maxProductPrice = Math.ceil(Math.max(...allProducts.map(p => p.price)));
+
+// Use selected prices or defaults
+const selectedMinPrice = minPrice ?? minProductPrice;
+const selectedMaxPrice = maxPrice ?? maxProductPrice;
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -59,10 +80,17 @@ const availableSizes = Array.from(
               availableSizes={availableSizes}
               baseUrl={`/productos${selectedCategory !== 'todos' ? `?categoria=${selectedCategory}` : ''}`}
             />
+            <PriceRangeFilter 
+              minPrice={minProductPrice}
+              maxPrice={maxProductPrice}
+              selectedMin={selectedMinPrice}
+              selectedMax={selectedMaxPrice}
+              baseUrl={`/productos${selectedCategory !== 'todos' ? `?categoria=${selectedCategory}` : '?'}${selectedSizes.length > 0 ? `&${selectedSizes.map(s => `talla=${s}`).join('&')}` : ''}`}
+            />
           </div>
 
           <!-- Lista de productos -->
-          <div class="mt-6 lg:col-span-3 lg:mt-0">
+          <div id="products-grid" class="mt-6 lg:col-span-3 lg:mt-0">
             {filteredProducts.length > 0 ? (
               <div class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8">
                 {filteredProducts.map((product) => (

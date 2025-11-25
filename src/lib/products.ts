@@ -76,7 +76,7 @@ export function getProductById(id: string): Product | undefined {
 }
 
 export function getProductsByCategory(category: string): Product[] {
-  if (category === 'todos') return [...products];
+  if (category === 'todos' || !category) return [...products];
   return products.filter(product => product.category === category);
 }
 
