@@ -1,25 +1,55 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ProductCard from '../../components/products/ProductCard.astro';
-import { products } from '../../lib/products';
+import CategoryFilter from '../../components/products/CategoryFilter.astro';
+import { getProductsByCategory, getProductCountByCategory } from '../../lib/products';
 
 const pageTitle = 'Nuestros Productos';
 const pageDescription = 'Descubre nuestra colección de ropa de alta calidad';
+
+// Get the selected category from URL params
+const url = new URL(Astro.request.url);
+const selectedCategory = url.searchParams.get('categoria') || 'todos';
+
+// Filter products based on the selected category
+const filteredProducts = getProductsByCategory(selectedCategory === 'todos' ? 'todos' : selectedCategory);
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
-  <div class="bg-white">
-    <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 lg:max-w-7xl lg:px-8">
-      <h1 class="text-3xl font-bold tracking-tight text-gray-900">Nuestra Colección</h1>
-      
-      <!-- Filtros (próximamente) -->
-      <div class="mt-6">
-        <h2 class="sr-only">Productos</h2>
-        
-        <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          {products.map((product) => (
-            <ProductCard product={product} />
-          ))}
+  <div class="bg-gray-50">
+    <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold tracking-tight text-gray-900">
+          {selectedCategory === 'todos' 
+            ? 'Nuestra Colección' 
+            : `Categoría: ${selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}`}
+        </h1>
+        <p class="text-sm text-gray-500">
+          {filteredProducts.length} {filteredProducts.length === 1 ? 'producto' : 'productos'}
+        </p>
+      </div>
+
+      <div class="mt-8">
+        <div class="lg:grid lg:grid-cols-4 lg:gap-8">
+          <!-- Filtros -->
+          <div class="lg:col-span-1">
+            <CategoryFilter selectedCategory={selectedCategory} />
+          </div>
+
+          <!-- Lista de productos -->
+          <div class="mt-6 lg:col-span-3 lg:mt-0">
+            {filteredProducts.length > 0 ? (
+              <div class="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-3 lg:gap-x-8">
+                {filteredProducts.map((product) => (
+                  <ProductCard product={product} />
+                ))}
+              </div>
+            ) : (
+              <div class="text-center py-12">
+                <p class="text-gray-500">No se encontraron productos en esta categoría.</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

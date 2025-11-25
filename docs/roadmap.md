@@ -20,21 +20,21 @@
     - [x] Estructura de datos de productos
     - [x] Componente de tarjeta de producto
     - [ ] Filtros y búsqueda
-      - [ ] Componente de barra de búsqueda
-        - [ ] Diseñar UI de la barra de búsqueda
-        - [ ] Implementar búsqueda en tiempo real
-        - [ ] Añadir funcionalidad de autocompletado
-        - [ ] Manejar estados de carga y error
-        - [ ] Añadir icono de búsqueda y botón de limpiar
-        - [ ] Implementar búsqueda por palabras clave
+      - [x] Componente de barra de búsqueda
+        - [x] Diseñar UI de la barra de búsqueda
+        - [x] Implementar búsqueda en tiempo real
+        - [x] Añadir funcionalidad de autocompletado
+        - [x] Manejar estados de carga y error
+        - [x] Añadir icono de búsqueda y botón de limpiar
+        - [x] Implementar búsqueda por palabras clave
         - [ ] Añadir sugerencias de búsqueda
-        - [ ] Hacer accesible con ARIA
-      - [ ] Filtros por categoría
-        - [ ] Obtener lista de categorías desde la fuente de datos
-        - [ ] Crear componente de checkbox para cada categoría
-        - [ ] Implementar lógica de filtrado múltiple
-        - [ ] Mostrar contador de productos por categoría
-        - [ ] Añadir opción de "Ver todos"
+        - [x] Hacer accesible con ARIA
+      - [x] Filtros por categoría
+        - [x] Obtener lista de categorías desde la fuente de datos
+        - [x] Crear componente de checkbox para cada categoría
+        - [x] Implementar lógica de filtrado múltiple
+        - [x] Mostrar contador de productos por categoría
+        - [x] Añadir opción de "Ver todos"
         
       - [ ] Filtros por talla
         - [ ] Definir sistema de tallas (XS, S, M, L, XL, etc.)

@@ -47,5 +47,16 @@ export function getProductById(id: string): Product | undefined {
 }
 
 export function getProductsByCategory(category: string): Product[] {
+  if (category === 'todos') return [...products];
   return products.filter(product => product.category === category);
+}
+
+export function getAllCategories(): string[] {
+  const categories = new Set(products.map(product => product.category));
+  return ['todos', ...Array.from(categories)];
+}
+
+export function getProductCountByCategory(category: string): number {
+  if (category === 'todos') return products.length;
+  return products.filter(product => product.category === category).length;
 }
