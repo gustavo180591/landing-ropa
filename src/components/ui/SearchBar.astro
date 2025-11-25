@@ -1,0 +1,143 @@
+---
+// src/components/ui/SearchBar.astro
+
+interface Props {
+  placeholder?: string;
+}
+
+const { 
+  placeholder = 'Buscar productos...',
+} = Astro.props;
+
+// Client-side script will be added here
+const searchScript = `
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search-input');
+    const clearButton = document.getElementById('clear-button');
+    const searchForm = document.getElementById('search-form');
+    let searchTimeout = null;
+
+    if (searchForm) {
+      searchForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const query = searchInput?.value.trim() || '';
+        console.log('Searching for:', query);
+        // You can dispatch a custom event or handle the search here
+      });
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (event) => {
+        if (searchTimeout) {
+          clearTimeout(searchTimeout);
+        }
+        
+        searchTimeout = setTimeout(() => {
+          const query = searchInput.value.trim();
+          console.log('Search query:', query);
+          // Handle search as user types
+        }, 300);
+      });
+    }
+
+    if (clearButton && searchInput) {
+      clearButton.addEventListener('click', () => {
+        searchInput.value = '';
+        searchInput.focus();
+        // Clear search results
+        console.log('Search cleared');
+      });
+    }
+  });
+`;
+---
+
+<div class="relative w-full max-w-xl mx-auto">
+  <form 
+    id="search-form"
+    class="relative flex items-center w-full"
+    role="search"
+    aria-label="Buscar productos"
+  >
+    <label for="search-input" class="sr-only">
+      Buscar productos
+    </label>
+    
+    <input
+      id="search-input"
+      type="search"
+      name="search"
+      placeholder={placeholder}
+      oninput="void 0"
+      class="w-full px-4 py-2 pr-10 text-gray-900 bg-white border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all duration-200"
+      autocomplete="off"
+      aria-autocomplete="both"
+      aria-controls="search-suggestions"
+    />
+    
+    <button 
+      type="button"
+      class="absolute right-10 p-1 text-gray-400 hover:text-gray-600 transition-colors"
+      aria-label="Limpiar búsqueda"
+      id="clear-button"
+    >
+      <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        class="h-5 w-5" 
+        fill="none" 
+        viewBox="0 0 24 24" 
+        stroke="currentColor"
+      >
+        <path 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          stroke-width="2" 
+          d="M6 18L18 6M6 6l12 12" 
+        />
+      </svg>
+    </button>
+    
+    <button 
+      type="submit" 
+      class="absolute right-0 p-2 text-gray-700 hover:text-blue-600 transition-colors"
+      aria-label="Buscar"
+    >
+      <svg 
+        xmlns="http://www.w3.org/2000/svg" 
+        class="h-5 w-5" 
+        fill="none" 
+        viewBox="0 0 24 24" 
+        stroke="currentColor"
+      >
+        <path 
+          stroke-linecap="round" 
+          stroke-linejoin="round" 
+          stroke-width="2" 
+          d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" 
+        />
+      </svg>
+    </button>
+  </form>
+  
+  <!-- Suggestions dropdown will be added here -->
+  <div 
+    id="search-suggestions" 
+    class="hidden absolute z-10 w-full mt-1 bg-white border border-gray-200 rounded-md shadow-lg"
+    role="listbox"
+    aria-label="Sugerencias de búsqueda"
+  >
+    <!-- Suggestions will be populated by JavaScript -->
+  </div>
+</div>
+
+<style>
+  /* Hide clear button when input is empty */
+  #search-input:placeholder-shown ~ #clear-button {
+    display: none;
+  }
+  
+  /* Show suggestions when input is focused */
+  #search-input:focus ~ #search-suggestions {
+    display: block;
+  }
+</style>

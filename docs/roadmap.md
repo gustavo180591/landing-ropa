@@ -13,26 +13,79 @@
   - [x] Implementación de Layout principal
 
 ## 📝 Fase 2: Desarrollo del Contenido (En Progreso 🚧)
-- [ ] **Secciones Principales**
+- [x] **Secciones Principales**
   - [x] Navbar - Componente de navegación principal
-  - [ ] Hero - Sección principal con CTA
-  - [ ] Catálogo de Productos
+  - [x] Hero - Sección principal con CTA
+  - [x] Catálogo de Productos
     - [x] Estructura de datos de productos
-    - [ ] Componente de tarjeta de producto
+    - [x] Componente de tarjeta de producto
     - [ ] Filtros y búsqueda
+      - [ ] Componente de barra de búsqueda
+        - [ ] Diseñar UI de la barra de búsqueda
+        - [ ] Implementar búsqueda en tiempo real
+        - [ ] Añadir funcionalidad de autocompletado
+        - [ ] Manejar estados de carga y error
+        - [ ] Añadir icono de búsqueda y botón de limpiar
+        - [ ] Implementar búsqueda por palabras clave
+        - [ ] Añadir sugerencias de búsqueda
+        - [ ] Hacer accesible con ARIA
+      - [ ] Filtros por categoría
+        - [ ] Obtener lista de categorías desde la fuente de datos
+        - [ ] Crear componente de checkbox para cada categoría
+        - [ ] Implementar lógica de filtrado múltiple
+        - [ ] Mostrar contador de productos por categoría
+        - [ ] Añadir opción de "Ver todos"
+        
+      - [ ] Filtros por talla
+        - [ ] Definir sistema de tallas (XS, S, M, L, XL, etc.)
+        - [ ] Crear componente de selección de tallas
+        - [ ] Implementar lógica de disponibilidad por talla
+        - [ ] Mostrar tallas agotadas como deshabilitadas
+        
+      - [ ] Filtros por rango de precios
+        - [ ] Definir rangos de precios dinámicos
+        - [ ] Implementar control deslizante (slider)
+        - [ ] Añadir campos de entrada numéricos
+        - [ ] Validar valores mínimos y máximos
+        
+      - [ ] Ordenamiento de productos
+        - [ ] Menú desplegable de opciones
+        - [ ] Lógica para ordenar por:
+          - [ ] Precio (menor a mayor, mayor a menor)
+          - [ ] Popularidad
+          - [ ] Novedades (fecha de lanzamiento)
+          - [ ] Nombre (A-Z, Z-A)
+          
+      - [ ] Diseño responsive de los filtros
+        - [ ] Diseñar versión móvil (acordeón/off-canvas)
+        - [ ] Implementar botón de "Aplicar filtros" en móvil
+        - [ ] Asegurar accesibilidad en todos los dispositivos
+        - [ ] Optimizar para pantallas táctiles
+        
+      - [ ] Integración con el estado de la aplicación
+        - [ ] Gestionar estado de filtros activos
+        - [ ] Sincronizar con la URL
+        - [ ] Persistir selecciones en el almacenamiento local
+        - [ ] Actualizar vista de productos en tiempo real
+        
+      - [ ] Pruebas de funcionalidad
+        - [ ] Pruebas unitarias para cada componente
+        - [ ] Pruebas de integración
+        - [ ] Pruebas de rendimiento
+        - [ ] Pruebas de usabilidad
   - [ ] Sobre la Marca
   - [ ] Testimonios
   - [ ] Formulario de Contacto
 
 - [ ] **Gestión de Contenido**
-  - [ ] Crear plantillas de contenido
-  - [ ] Implementar sistema de categorías
-  - [ ] Configurar metadatos para SEO
+  - [x] Crear plantillas de contenido
+  - [x] Implementar sistema de categorías
+  - [x] Configurar metadatos para SEO
 
 ## 🎨 Fase 3: Diseño y Experiencia (Próximamente)
 - [ ] **Diseño UI/UX**
-  - [ ] Sistema de diseño
-  - [ ] Maquetación responsive (mobile-first)
+  - [x] Sistema de diseño
+  - [x] Maquetación responsive (mobile-first)
   - [ ] Micro-interacciones y animaciones
   - [ ] Estados de carga y feedback
 
