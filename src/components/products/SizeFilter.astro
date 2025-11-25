@@ -1,0 +1,78 @@
+---
+// src/components/products/SizeFilter.astro
+import type { Size } from '../../lib/products';
+
+interface Props {
+  selectedSizes?: Size[];
+  availableSizes: Size[];
+  baseUrl?: string;
+}
+
+const {
+  selectedSizes = [],
+  availableSizes = [],
+  baseUrl = '/productos'
+} = Astro.props;
+
+const allSizes: Size[] = ['XS', 'S', 'M', 'L', 'XL', 'XXL', '3XL', '28', '30', '32', '34', '36', '38'];
+
+const isSizeAvailable = (size: Size) => availableSizes.includes(size);
+
+const getSizeHref = (size: Size, isSelected: boolean) => {
+  const sizes = new Set(selectedSizes);
+  
+  if (isSelected) {
+    sizes.delete(size);
+  } else {
+    sizes.add(size);
+  }
+
+  const params = new URLSearchParams();
+  if (sizes.size > 0) {
+    sizes.forEach(s => params.append('talla', s));
+  }
+  
+  return `${baseUrl}${params.toString() ? `?${params.toString()}` : ''}`;
+};
+---
+
+<div class="space-y-4">
+  <h3 class="text-lg font-medium text-gray-900">Tallas</h3>
+  <div class="flex flex-wrap gap-2">
+    {allSizes.map((size) => {
+      const isSelected = selectedSizes.includes(size);
+      const isDisabled = !isSizeAvailable(size);
+      const href = isDisabled ? '#' : getSizeHref(size, isSelected);
+      
+      return (
+        <a
+          href={href}
+          class={`
+            px-3 py-2 rounded-md text-sm font-medium
+            ${isSelected 
+              ? 'bg-blue-100 text-blue-800' 
+              : 'bg-white text-gray-700 hover:bg-gray-50 border border-gray-200'
+            }
+            ${isDisabled 
+              ? 'opacity-50 cursor-not-allowed' 
+              : 'cursor-pointer hover:border-blue-300'
+            }
+            transition-colors duration-200
+          `}
+          aria-disabled={isDisabled}
+          aria-pressed={isSelected}
+          aria-label={`Talla ${size}${isDisabled ? ' - No disponible' : ''}`}
+          data-size={size}
+        >
+          {size}
+        </a>
+      );
+    })}
+  </div>
+</div>
+
+<style>
+  a[aria-disabled="true"] {
+    pointer-events: none;
+  }
+</style>
