@@ -20,7 +20,7 @@ Cada prenda está diseñada con atención al detalle y fabricada con los mejores
     "id": 2,
     "name": "Jean Slim Fit",
     "price": 25990,
-    "image": "/images/products/jean-slim.jpg",
+    "image": "/images/products/jeans-slim.png",
     "category": "Pantalones"
   },
   {

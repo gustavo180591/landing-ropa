@@ -20,11 +20,11 @@ export interface Product {
 export const products: Product[] = [
   {
     id: '1',
-    name: 'Camiseta Básica',
-    description: 'Camiseta de algodón 100% suave y cómoda',
-    price: 24.99,
-    image: '/images/products/camiseta-basica.jpg',
-    category: 'camisetas',
+    name: 'Saco de Lana',
+    description: 'Saco de lana merino 100% de la más alta calidad, ideal para los días fríos de invierno',
+    price: 129.99,
+    image: '/images/products/saco-lana.png',
+    category: 'abrigos',
     featured: true,
     sizes: [
       { size: 'S', inStock: true },
@@ -36,33 +36,50 @@ export const products: Product[] = [
   },
   {
     id: '2',
-    name: 'Jeans Clásicos',
-    description: 'Jeans ajustados de corte clásico',
-    price: 59.99,
-    image: '/images/products/jeans-clasicos.jpg',
-    category: 'pantalones',
+    name: 'Vestido Floral',
+    description: 'Vestido de verano con estampado floral',
+    price: 89.99,
+    image: '/images/products/vestido-floral.png',
+    category: 'vestidos',
+    featured: true,
     sizes: [
-      { size: '28', inStock: true },
-      { size: '30', inStock: true },
-      { size: '32', inStock: false },
-      { size: '34', inStock: true },
-      { size: '36', inStock: true }
+      { size: 'XS', inStock: true },
+      { size: 'S', inStock: true },
+      { size: 'M', inStock: true },
+      { size: 'L', inStock: true },
+      { size: 'XL', inStock: true }
     ]
   },
   {
     id: '3',
-    name: 'Vestido Floral',
-    description: 'Vestido de verano con estampado floral',
-    price: 45.99,
-    image: '/images/products/vestido-floral.jpg',
-    category: 'vestidos',
+    name: 'Jeans Slim Fit',
+    description: 'Jeans ajustados de corte moderno y cómodo',
+    price: 69.99,
+    image: '/images/products/jeans-slim.png',
+    category: 'pantalones',
     featured: true,
     sizes: [
-      { size: 'XS', inStock: false },
+      { size: '28', inStock: true },
+      { size: '30', inStock: true },
+      { size: '32', inStock: true },
+      { size: '34', inStock: true },
+      { size: '36', inStock: false }
+    ]
+  },
+  {
+    id: '4',
+    name: 'Blusa de Seda',
+    description: 'Blusa elegante de seda 100% natural',
+    price: 59.99,
+    image: '/images/products/blusa-seda.png',
+    category: 'blusas',
+    featured: true,
+    sizes: [
+      { size: 'XS', inStock: true },
       { size: 'S', inStock: true },
       { size: 'M', inStock: true },
-      { size: 'L', inStock: true },
-      { size: 'XL', inStock: false }
+      { size: 'L', inStock: false },
+      { size: 'XL', inStock: true }
     ]
   }
 ];

@@ -1,0 +1,98 @@
+---
+const { 
+  title = 'Productos Destacados',
+  subtitle = 'Descubre nuestras prendas más populares'
+} = Astro.props;
+
+// Datos de ejemplo para los productos
+const products = [
+  {
+    id: 1,
+    name: 'Saco de Lana',
+    price: 129.99,
+    image: '/images/products/saco-lana.png',
+    category: 'Abrigos'
+  },
+  {
+    id: 2,
+    name: 'Vestido Floral',
+    price: 89.99,
+    image: '/images/products/vestido-floral.png',
+    category: 'Vestidos'
+  },
+  {
+    id: 3,
+    name: 'Jeans Slim Fit',
+    price: 69.99,
+    image: '/images/products/jeans-slim.png',
+    category: 'Pantalones'
+  },
+  {
+    id: 4,
+    name: 'Blusa de Seda',
+    price: 59.99,
+    image: '/images/products/blusa-seda.png',
+    category: 'Blusas'
+  }
+];
+---
+
+<section class="py-12 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+        {title}
+      </h2>
+      <p class="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+        {subtitle}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+      {
+        products.map((product) => (
+          <div class="group relative bg-white p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300">
+            <div class="w-full min-h-80 aspect-w-1 aspect-h-1 rounded-md overflow-hidden group-hover:opacity-75 lg:h-80 lg:aspect-none">
+              <img 
+                src={product.image} 
+                alt={product.name}
+                class="w-full h-full object-center object-cover lg:w-full lg:h-full"
+                width="300"
+                height="400"
+              />
+            </div>
+            <div class="mt-4 flex justify-between">
+              <div>
+                <h3 class="text-sm text-gray-700">
+                  <a href={`/producto/${product.id}`} class="hover:text-amber-600 transition-colors">
+                    <span aria-hidden="true" class="absolute inset-0" />
+                    {product.name}
+                  </a>
+                </h3>
+                <p class="mt-1 text-sm text-gray-500">{product.category}</p>
+              </div>
+              <p class="text-sm font-medium text-gray-900">${product.price.toFixed(2)}</p>
+            </div>
+            <div class="mt-4">
+              <a 
+                href={`/producto/${product.id}`} 
+                class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors duration-300"
+              >
+                Ver detalles
+              </a>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-12 text-center">
+      <a 
+        href="/productos" 
+        class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-amber-600 hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-colors duration-300"
+      >
+        Ver todos los productos
+      </a>
+    </div>
+  </div>
+</section>

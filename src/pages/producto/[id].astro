@@ -1,0 +1,109 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+// Definir interfaces para los tipos
+interface ProductColor {
+  name: string;
+  class: string;
+  selectedClass: string;
+}
+
+interface ProductSize {
+  name: string;
+  inStock: boolean;
+}
+
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  originalPrice: number;
+  discount: number;
+  description: string;
+  category: string;
+  images: string[];
+  colors: ProductColor[];
+  sizes: ProductSize[];
+  details: string[];
+  careInstructions: string[];
+}
+
+// Función que define las rutas estáticas
+export async function getStaticPaths() {
+  // Lista de IDs de productos que queremos pre-renderizar
+  const products = [
+    { id: '1' },  // Saco de Lana
+    { id: '2' },  // Vestido Floral
+    { id: '3' },  // Jeans Slim Fit
+    { id: '4' }   // Blusa de Seda
+  ];
+
+  return products.map(product => ({
+    params: { id: product.id }
+  }));
+}
+
+// Obtener el ID del producto de la URL
+const { id } = Astro.params;
+
+// Definir el tipo para el objeto products
+const products: { [key: string]: Product } = {
+  '1': {
+    id: 1,
+    name: 'Saco de Lana',
+    price: 129.99,
+    originalPrice: 159.99,
+    discount: 20,
+    description: 'Saco de lana merino 100% de la más alta calidad, ideal para los días fríos de invierno. Confeccionado artesanalmente con materiales premium.',
+    category: 'Abrigos',
+    images: [
+      '/images/products/saco-lana.png',
+      '/images/products/saco-lana-2.jpg',
+      '/images/products/saco-lana-3.jpg'
+    ],
+    colors: [
+      { name: 'Beige', class: 'bg-amber-100', selectedClass: 'ring-gray-400' },
+      { name: 'Negro', class: 'bg-gray-900', selectedClass: 'ring-gray-400' },
+      { name: 'Azul Marino', class: 'bg-blue-900', selectedClass: 'ring-gray-400' },
+    ],
+    sizes: [
+      { name: 'XS', inStock: true },
+      { name: 'S', inStock: true },
+      { name: 'M', inStock: true },
+      { name: 'L', inStock: false },
+      { name: 'XL', inStock: true },
+    ],
+    details: [
+      '100% Lana Merino',
+      'Forro interior de seda',
+      'Bolsillos frontales',
+      'Botones de madera natural',
+      'Hecho a mano en Argentina'
+    ],
+    careInstructions: [
+      'Lavado a mano con agua fría',
+      'No usar secadora',
+      'Planchar a baja temperatura',
+      'No usar blanqueador'
+    ]
+  },
+  // Agregar más productos aquí...
+};
+
+// Obtener el producto actual
+const product = products[id];
+
+// Si el producto no existe, redirigir a 404
+if (!product) {
+  return Astro.redirect('/404');
+}
+
+// Calcular precio con descuento
+const finalPrice = product.price.toFixed(2);
+const originalPrice = product.originalPrice ? product.originalPrice.toFixed(2) : null;
+---
+
+<!-- El resto del componente se mantiene igual -->
+<Layout title={`${product.name} | Tienda`}>
+  <!-- ... resto del JSX ... -->
+</Layout>
